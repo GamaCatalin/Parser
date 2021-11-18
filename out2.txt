@@ -1,0 +1,265 @@
+q 0
+[]
+['program']
+---expand---
+q 0
+[('program', 0)]
+['START', 'stmtlist', 'EXIT']
+---advance---
+q 1
+[('program', 0), 'START']
+['stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0)]
+['stmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0)]
+['simplestmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 0)]
+['assignstmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 0), ('assignstmt', 0)]
+['identifier', '=', 'expression', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 0), ('assignstmt', 0)]
+['identifier', '=', 'expression', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 0)]
+['assignstmt', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1)]
+['iostmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1), ('iostmt', 0)]
+['read', '(', 'identifier', ')', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1), ('iostmt', 0)]
+['read', '(', 'identifier', ')', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1), ('iostmt', 1)]
+['write', '(', 'identifier', ')', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1), ('iostmt', 1)]
+['write', '(', 'identifier', ')', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0), ('simplestmt', 1)]
+['iostmt', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 0)]
+['simplestmt', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1)]
+['structstmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0)]
+['ifstmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0), ('ifstmt', 0)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0), ('ifstmt', 0)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0), ('ifstmt', 1)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', 'else', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0), ('ifstmt', 1)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', 'else', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 0)]
+['ifstmt', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 1)]
+['forstmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 1), ('forstmt', 0)]
+['for', '(', 'assignstmt', ';', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 1), ('forstmt', 0)]
+['for', '(', 'assignstmt', ';', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 1)]
+['forstmt', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 2)]
+['whilestmt', ';', 'stmtlist', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 2), ('whilestmt', 0)]
+['while', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 2), ('whilestmt', 0)]
+['while', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1), ('structstmt', 2)]
+['whilestmt', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0), ('stmt', 1)]
+['structstmt', ';', 'stmtlist', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 0)]
+['stmt', ';', 'stmtlist', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1)]
+['stmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0)]
+['simplestmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 0)]
+['assignstmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 0), ('assignstmt', 0)]
+['identifier', '=', 'expression', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 0), ('assignstmt', 0)]
+['identifier', '=', 'expression', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 0)]
+['assignstmt', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1)]
+['iostmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1), ('iostmt', 0)]
+['read', '(', 'identifier', ')', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1), ('iostmt', 0)]
+['read', '(', 'identifier', ')', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1), ('iostmt', 1)]
+['write', '(', 'identifier', ')', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1), ('iostmt', 1)]
+['write', '(', 'identifier', ')', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0), ('simplestmt', 1)]
+['iostmt', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 0)]
+['simplestmt', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1)]
+['structstmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0)]
+['ifstmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0), ('ifstmt', 0)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0), ('ifstmt', 0)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0), ('ifstmt', 1)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', 'else', '{', 'stmtlist', '}', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0), ('ifstmt', 1)]
+['if', '(', 'condition', ')', '{', 'stmtlist', '}', 'else', '{', 'stmtlist', '}', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 0)]
+['ifstmt', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 1)]
+['forstmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 1), ('forstmt', 0)]
+['for', '(', 'assignstmt', ';', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 1), ('forstmt', 0)]
+['for', '(', 'assignstmt', ';', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 1)]
+['forstmt', ';', 'EXIT']
+---another try---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 2)]
+['whilestmt', ';', 'EXIT']
+---expand---
+q 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 2), ('whilestmt', 0)]
+['while', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---momentary insuccess---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 2), ('whilestmt', 0)]
+['while', '(', 'condition', ')', '{', 'stmtlist', '}', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1), ('structstmt', 2)]
+['whilestmt', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1), ('stmt', 1)]
+['structstmt', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START', ('stmtlist', 1)]
+['stmt', ';', 'EXIT']
+---another try---
+b 1
+[('program', 0), 'START']
+['stmtlist', 'EXIT']
+---back---
+b 0
+[('program', 0)]
+['START', 'stmtlist', 'EXIT']
+---another try---
+b 0
+[]
+['program']
+-------RESULT:-------
+ERROR! @ index: 0
