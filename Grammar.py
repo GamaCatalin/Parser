@@ -77,7 +77,7 @@ class Grammar:
 
 
 def menu():
-    grammar = Grammar("g1.txt")
+    grammar = Grammar("g2.txt")
     while True:
         try:
             option = int(input(

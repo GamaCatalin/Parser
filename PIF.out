@@ -1,0 +1,55 @@
+START->0
+int->0
+identifier->(0, 0)
+;->0
+int->0
+identifier->(1, 0)
+;->0
+int->0
+identifier->(2, 0)
+;->0
+int->0
+identifier->(6, 0)
+;->0
+read->0
+(->0
+identifier->(0, 0)
+)->0
+;->0
+read->0
+(->0
+identifier->(1, 0)
+)->0
+;->0
+read->0
+(->0
+identifier->(2, 0)
+)->0
+;->0
+int->0
+identifier->(1, 1)
+;->0
+identifier->(1, 1)
+=->0
+identifier->(0, 0)
++->0
+identifier->(1, 0)
++->0
+identifier->(2, 0)
+;->0
+identifier->(6, 0)
+=->0
+identifier->(1, 1)
+/->0
+const->(3, 0)
+;->0
+identifier->(0, 0)
+=->0
+const->(1, 2)
+;->0
+write->0
+(->0
+identifier->(6, 0)
+)->0
+;->0
+EXIT->0

@@ -1,0 +1,43 @@
+program declaration type type1 arraydecl stmtlist stmt simplestmt structstmt ifstmt forstmt whilestmt assignstmt expression term factor iostmt operation condition RELATION
+( ) [ ] { } ; : . , + - * / % = < > <= >= == != ! START EXIT and array else for if int or string while read write identifier const
+program
+program->START stmtlist EXIT
+type1->int
+type1->string
+type->type1
+type->arraydecl
+stmtlist->stmt ; stmtlist
+stmtlist->stmt ;
+stmt->simplestmt
+stmt->structstmt
+simplestmt->declaration
+simplestmt->assignstmt
+simplestmt->iostmt
+structstmt->ifstmt
+structstmt->forstmt
+structstmt->whilestmt
+declaration->type identifier
+arraydecl->type1 array [ integer ]
+assignstmt->identifier = expression
+iostmt->read ( identifier )
+iostmt->write ( identifier )
+ifstmt->if ( condition ) { stmtlist }
+ifstmt->if ( condition ) { stmtlist } else { stmtlist }
+forstmt->for ( condition ) { stmtlist }
+whilestmt->while ( condition ) { stmtlist }
+expression->term operation expression
+expression->term
+condition->expression RELATION expression
+operation->+
+operation->-
+operation->*
+operation->/
+operation->%
+term->identifier
+term->const
+RELATION->==
+RELATION->!=
+RELATION-><=
+RELATION-><
+RELATION->>=
+RELATION->>
