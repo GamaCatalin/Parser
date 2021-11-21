@@ -17,7 +17,7 @@ structstmt->ifstmt
 structstmt->forstmt
 structstmt->whilestmt
 declaration->type identifier
-arraydecl->type1 array [ integer ]
+arraydecl->type1 array [ int ]
 assignstmt->identifier = expression
 iostmt->read ( identifier )
 iostmt->write ( identifier )

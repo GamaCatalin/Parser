@@ -75,14 +75,32 @@ class Grammar:
             pretty_str += "There is no such non terminal"
         return pretty_str
 
+    def is_cfg(self):
+        if self.__start_symbol[0] not in self.__non_terminals:
+            return False
+        for key in self.__productions.keys():
+            if key not in self.__non_terminals:
+                return False
+            for move in self.__productions[key]:
+                # print(move)
+                for char in move:
+                    if char not in self.__non_terminals and char not in self.__terminals:
+                        # print(char)
+                        return False
+        return True
 
 def menu():
     grammar = Grammar("g2.txt")
     while True:
         try:
             option = int(input(
-                "\nEnter \n1 get the set of  non-terminal symbols \n2 get the alphabet (set of terminal symbols) \n3 "
-                "get the start symbol \n4 get the finite set of productions \n5 get productions from a non-terminal "
+                "\nEnter "
+                "\n1 get the set of  non-terminal symbols "
+                "\n2 get the alphabet (set of terminal symbols) "
+                "\n3 get the start symbol "
+                "\n4 get the finite set of productions "
+                "\n5 get productions from a non-terminal "
+                "\n6 check if grammar is context free"
                 "\n0 to exit.\n>> "))
             if option == 1:
                 print(grammar.get_non_terminals())
@@ -95,6 +113,10 @@ def menu():
             elif option == 5:
                 nt = input("Give non-terminal >> ")
                 print(grammar.print_productions_for_non_terminal(nt))
+            elif option == 6:
+                cfg = grammar.is_cfg()
+                msg = "Grammar is context free!" if cfg else "Grammar is NOT context free!"
+                print(msg)
             elif option == 0:
                 return
             else:
