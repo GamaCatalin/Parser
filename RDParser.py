@@ -219,5 +219,5 @@ class ParserRecursiveDescendent:
 
 
 if __name__ == "__main__":
-    # parcer_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
-    parcer_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
+    # parser_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
+    parser_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
