@@ -77,18 +77,15 @@ class Grammar:
 
     def is_cfg(self):
         if self.__start_symbol[0] not in self.__non_terminals:
-            print(f"Start symbol '{self.__start_symbol[0]} is not a non terminal!'")
             return False
         for key in self.__productions.keys():
             if key not in self.__non_terminals:
-                print(f"State {key} can't be found!\n")
                 return False
             for move in self.__productions[key]:
                 # print(move)
                 for char in move:
                     if char not in self.__non_terminals and char not in self.__terminals:
                         # print(char)
-                        print(f"Error on character '{char}' from sequence {move} on state '{key}'!\n")
                         return False
         return True
 
