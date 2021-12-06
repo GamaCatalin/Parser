@@ -35,31 +35,19 @@ class ParserRecursiveDescendent:
     def read_sequence(self, seq_file):
         seq = []
         with open(seq_file) as f:
-            if seq_file == "PIF.out":
+            line = f.readline()
+            while line:
+                elems_line = line.split("->")
+                seq.append(elems_line[0])
                 line = f.readline()
-                while line:
-                    elems_line = line.split("->")
-                    seq.append(elems_line[0])
-                    line = f.readline()
-            else:
-                line = f.readline()
-                while line:
-                    seq.append(line[0:-1])
-                    line = f.readline()
         return seq
 
-    def get_situation(self):
+    def write_status(self):
         with open(self.out_file, 'a') as f:
-            # f.write("--------------\n")
             f.write(str(self.state) + " ")
             f.write(str(self.index) + "\n")
             f.write(str(self.working) + "\n")
             f.write(str(self.input) + "\n")
-        # print("--------------")
-        # print(self.state)
-        # print(self.index)
-        # print(self.working)
-        # print(self.input)
 
     def init_out_file(self):
         f = open(self.out_file, 'w')
@@ -73,39 +61,32 @@ class ParserRecursiveDescendent:
             f.write(message + "\n")
 
     def expand(self):
-        # print("---expand---")
         self.write_in_out("---expand---")
         non_terminal = self.input.pop(0)
         self.working.append((non_terminal, 0))
-        # self.input.append(self.grammar.get_productions_for_non_terminal(non_terminal)[0])
         new_production = self.grammar.get_productions_for_non_terminal(non_terminal)[0]
         self.input = new_production + self.input
 
     def advance(self):
-        # print("---advance---")
         self.write_in_out("---advance---")
         self.working.append(self.input.pop(0))
         self.index += 1
 
     def momentary_insuccess(self):
-        # print("---momentary insuccess---")
         self.write_in_out("---momentary insuccess---")
         self.state = "b"
 
     def back(self):
-        # print("---back---")
         self.write_in_out("---back---")
         new_thing = self.working.pop()
         self.input = [new_thing] + self.input
         self.index -= 1
 
     def success(self):
-        # print("---success---")
         self.write_in_out("---success---")
         self.state = "f"
 
     def another_try(self):
-        # print("---another try---")
         self.write_in_out("---another try---")
         last_nt = self.working.pop()  # (nt, production_nr)
         if last_nt[1] + 1 < len(self.grammar.get_productions_for_non_terminal(last_nt[0])):
@@ -135,7 +116,7 @@ class ParserRecursiveDescendent:
 
     def run(self, w):
         while (self.state != 'f') and (self.state != 'e'):
-            self.get_situation()
+            self.write_status()
             if self.state == 'q':
                 if len(self.input) == 0 and self.index == len(w):
                     self.success()
@@ -162,12 +143,12 @@ class ParserRecursiveDescendent:
                     else:
                         self.another_try()
         if self.state == 'e':
-            mesaj = "ERROR! @ index: {}".format(self.index)
+            msg = "ERROR! @ index: {}".format(self.index)
         else:
-            mesaj = "Sequence is accepted!"
+            msg = "Sequence is accepted!"
             self.print_working()
-        print(mesaj)
-        self.write_in_out(mesaj, True)
+        print(msg)
+        self.write_in_out(msg, True)
         self.create_parsing_tree()
         self.write_parsing_tree()
 
@@ -185,16 +166,16 @@ class ParserRecursiveDescendent:
                 self.tree[index].father = father
                 father = index
                 len_prod = len(self.grammar.get_productions()[self.working[index][0]][self.working[index][1]])
-                vector_indx = []
+                vector_index = []
                 for i in range(1, len_prod + 1):
-                    vector_indx.append(index + i)
+                    vector_index.append(index + i)
                 for i in range(0, len_prod):
-                    if self.tree[vector_indx[i]].production != -1:
-                        offset = self.get_len_depth(vector_indx[i])
+                    if self.tree[vector_index[i]].production != -1:
+                        offset = self.get_len_depth(vector_index[i])
                         for j in range(i + 1, len_prod):
-                            vector_indx[j] += offset
+                            vector_index[j] += offset
                 for i in range(0, len_prod - 1):
-                    self.tree[vector_indx[i]].sibling = vector_indx[i + 1]
+                    self.tree[vector_index[i]].sibling = vector_index[i + 1]
             else:
                 self.tree[index].father = father
                 father = -1
@@ -202,6 +183,7 @@ class ParserRecursiveDescendent:
     def get_len_depth(self, index):
         production = self.grammar.get_productions()[self.working[index][0]][self.working[index][1]]
         len_prod = len(production)
+        # print(f"{self.working[index][0]} -> {production}")
         sum = len_prod
         for i in range(1, len_prod + 1):
             if type(self.working[index + i]) == tuple:
@@ -219,5 +201,5 @@ class ParserRecursiveDescendent:
 
 
 if __name__ == "__main__":
-    # parcer_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
-    parcer_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
+    # parser_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
+    parser_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
