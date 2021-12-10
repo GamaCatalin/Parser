@@ -22,7 +22,7 @@ class ParserRecursiveDescendent:
         # working stack
         self.working = []  # examples: [], [(S, 1), 'a', ]
         # input stack
-        self.input = [self.grammar.get_start_symbol()[0]]  # ['S'], ['a', 'S', 'b', 'S', 'b', 'S']
+        self.input = [self.grammar.get_start_symbol()[0]]  # ['S'], ['a', 'S', 'b', 'S']
         # q - normal state, b - back state, f - final state, e -error state
         self.state = "q"
         # position of current symbol in input sequence
@@ -78,8 +78,8 @@ class ParserRecursiveDescendent:
 
     def back(self):
         self.write_in_out("---back---")
-        new_thing = self.working.pop()
-        self.input = [new_thing] + self.input
+        next_nt = self.working.pop()
+        self.input = [next_nt] + self.input
         self.index -= 1
 
     def success(self):
@@ -97,7 +97,7 @@ class ParserRecursiveDescendent:
             # change production on top input
             len_last_production = len(self.grammar.get_productions_for_non_terminal(last_nt[0])[last_nt[1]])
             # delete last production from input
-            self.input = self.input[len_last_production:]  # maybe len -1
+            self.input = self.input[len_last_production:]
             # put new production in input
             new_production = self.grammar.get_productions_for_non_terminal(last_nt[0])[last_nt[1] + 1]
             self.input = new_production + self.input
@@ -106,7 +106,7 @@ class ParserRecursiveDescendent:
         else:
             # change production on top input
             len_last_production = len(self.grammar.get_productions_for_non_terminal(last_nt[0])[last_nt[1]])
-            # delete last production from input
+            # remove last production from input
             self.input = self.input[len_last_production:]
             self.input = [last_nt[0]] + self.input
 
@@ -122,7 +122,7 @@ class ParserRecursiveDescendent:
                     self.success()
                 elif len(self.input) == 0:
                     self.state = 'e'
-                    print("No input, still have terminals to parse")
+                    print("Input is empty, however sequence still not done")
                     break
                 else:
                     if self.input[0] in self.grammar.get_non_terminals():
@@ -136,14 +136,14 @@ class ParserRecursiveDescendent:
                 if self.state == 'b':
                     if self.index == 0 and len(self.working) == 0:
                         self.state = 'e'
-                        print("no top working to look at in Back!")
+                        print("Working is empty, can't look back")
                         break
                     if self.working[-1] in self.grammar.get_terminals():
                         self.back()
                     else:
                         self.another_try()
         if self.state == 'e':
-            msg = "ERROR! @ index: {}".format(self.index)
+            msg = f"Error at index: {self.index}"
         else:
             msg = "Sequence is accepted!"
             self.print_working()
@@ -197,7 +197,6 @@ class ParserRecursiveDescendent:
             for index in range(0, len(self.working)):
                 msg = str(index) + "  " + str(self.tree[index])
                 self.write_in_out(msg)
-
 
 
 if __name__ == "__main__":
