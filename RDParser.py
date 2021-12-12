@@ -162,6 +162,7 @@ class ParserRecursiveDescendent:
                 self.tree.append(Node(self.working[index]))
 
         for index in range(0, len(self.working)):
+            print(f"current elem: {self.working[index]}")
             if type(self.working[index]) == tuple:
                 self.tree[index].father = father
                 father = index
@@ -169,9 +170,11 @@ class ParserRecursiveDescendent:
                 vector_index = []
                 for i in range(1, len_prod + 1):
                     vector_index.append(index + i)
+                print(f"    vector {vector_index}")
                 for i in range(0, len_prod):
                     if self.tree[vector_index[i]].production != -1:
                         offset = self.get_len_depth(vector_index[i])
+                        print(f"        len depth: {offset}")
                         for j in range(i + 1, len_prod):
                             vector_index[j] += offset
                 for i in range(0, len_prod - 1):
@@ -200,5 +203,5 @@ class ParserRecursiveDescendent:
 
 
 if __name__ == "__main__":
-    # parser_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
-    parser_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
+    parser_trial1 = ParserRecursiveDescendent("g1.txt", "seq.txt", "out1.txt")
+    # parser_trial2 = ParserRecursiveDescendent("g2.txt", "PIF.out", "out2.txt")
