@@ -70,8 +70,8 @@ Parsing tree:
 idx val f  sibling
 0  S  -1  -1
 1  a  0  2
-2  S  -1  4
+2  S  0  4
 3  c  2  -1
-4  b  -1  5
-5  S  -1  -1
+4  b  0  5
+5  S  0  -1
 6  c  5  -1

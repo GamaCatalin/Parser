@@ -164,7 +164,7 @@ class ParserRecursiveDescendent:
         for index in range(0, len(self.working)):
             print(f"current elem: {self.working[index]}")
             if type(self.working[index]) == tuple:
-                self.tree[index].father = father
+                # self.tree[index].father = father
                 father = index
                 len_prod = len(self.grammar.get_productions()[self.working[index][0]][self.working[index][1]])
                 vector_index = []
@@ -177,11 +177,17 @@ class ParserRecursiveDescendent:
                         print(f"        len depth: {offset}")
                         for j in range(i + 1, len_prod):
                             vector_index[j] += offset
+                        print(f"        offset vector: {vector_index}")
+
+                        for idx in range(0,len(vector_index)):
+                            self.tree[vector_index[idx]].father = father
                 for i in range(0, len_prod - 1):
                     self.tree[vector_index[i]].sibling = vector_index[i + 1]
             else:
-                self.tree[index].father = father
-                father = -1
+                # pass
+                if self.tree[index].father == -1:
+                    self.tree[index].father = father
+                # father = -1
 
     def get_len_depth(self, index):
         production = self.grammar.get_productions()[self.working[index][0]][self.working[index][1]]
