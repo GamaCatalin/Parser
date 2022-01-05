@@ -19,17 +19,13 @@ class ParserRecursiveDescendent:
         self.out_file = out_file
         self.init_out_file()
         print(self.sequence)
-        # working stack
-        self.working = []  # examples: [], [(S, 1), 'a', ]
-        # input stack
-        self.input = [self.grammar.get_start_symbol()[0]]  # ['S'], ['a', 'S', 'b', 'S']
-        # q - normal state, b - back state, f - final state, e -error state
+        self.working = []
+        self.input = [self.grammar.get_start_symbol()[0]]
+
+        # q -normal state, b -back state, e -error state f -final state,
         self.state = "q"
-        # position of current symbol in input sequence
         self.index = 0
-        # representation- parsing tree
         self.tree = []
-        # run the Parser for the sequence
         self.run(self.sequence)
 
     def read_sequence(self, seq_file):
@@ -61,33 +57,34 @@ class ParserRecursiveDescendent:
             f.write(message + "\n")
 
     def expand(self):
-        self.write_in_out("---expand---")
+        self.write_in_out("*---EXPAND---*")
         non_terminal = self.input.pop(0)
         self.working.append((non_terminal, 0))
         new_production = self.grammar.get_productions_for_non_terminal(non_terminal)[0]
         self.input = new_production + self.input
 
-    def advance(self):
-        self.write_in_out("---advance---")
-        self.working.append(self.input.pop(0))
-        self.index += 1
-
     def momentary_insuccess(self):
-        self.write_in_out("---momentary insuccess---")
+        self.write_in_out("*---MOMENTARY INSUCCESS---*")
         self.state = "b"
 
     def back(self):
-        self.write_in_out("---back---")
+        self.write_in_out("*---BACK---*")
         next_nt = self.working.pop()
         self.input = [next_nt] + self.input
         self.index -= 1
 
+    def advance(self):
+        self.write_in_out("*---ADVANCE---*")
+        non_terminal = self.input.pop(0)
+        self.working.append(non_terminal)
+        self.index += 1
+
     def success(self):
-        self.write_in_out("---success---")
+        self.write_in_out("*---SUCCESS---*")
         self.state = "f"
 
     def another_try(self):
-        self.write_in_out("---another try---")
+        self.write_in_out("*---ANOTHER TRY---*")
         last_nt = self.working.pop()  # (nt, production_nr)
         if last_nt[1] + 1 < len(self.grammar.get_productions_for_non_terminal(last_nt[0])):
             self.state = "q"
@@ -110,7 +107,7 @@ class ParserRecursiveDescendent:
             self.input = self.input[len_last_production:]
             self.input = [last_nt[0]] + self.input
 
-    def print_working(self):
+    def print_working_stack(self):
         print(self.working)
         self.write_in_out(str(self.working))
 
@@ -146,7 +143,7 @@ class ParserRecursiveDescendent:
             msg = f"Error at index: {self.index}"
         else:
             msg = "Sequence is accepted!"
-            self.print_working()
+            self.print_working_stack()
         print(msg)
         self.write_in_out(msg, True)
         self.create_parsing_tree()
@@ -173,7 +170,7 @@ class ParserRecursiveDescendent:
                 print(f"    vector {vector_index}")
                 for i in range(0, len_prod):
                     if self.tree[vector_index[i]].production != -1:
-                        offset = self.get_len_depth(vector_index[i])
+                        offset = self.compute_depth_recursive(vector_index[i])
                         print(f"        len depth: {offset}")
                         for j in range(i + 1, len_prod):
                             vector_index[j] += offset
@@ -189,14 +186,14 @@ class ParserRecursiveDescendent:
                     self.tree[index].father = father
                 # father = -1
 
-    def get_len_depth(self, index):
+    def compute_depth_recursive(self, index):
         production = self.grammar.get_productions()[self.working[index][0]][self.working[index][1]]
         len_prod = len(production)
         # print(f"{self.working[index][0]} -> {production}")
         sum = len_prod
         for i in range(1, len_prod + 1):
             if type(self.working[index + i]) == tuple:
-                sum += self.get_len_depth(index + i)
+                sum += self.compute_depth_recursive(index + i)
         return sum
 
     def write_parsing_tree(self):

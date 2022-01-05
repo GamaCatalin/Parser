@@ -1,67 +1,67 @@
 q 0
 []
 ['S']
----expand---
+*---EXPAND---*
 q 0
 [('S', 0)]
 ['a', 'S', 'b', 'S']
----advance---
+*---ADVANCE---*
 q 1
 [('S', 0), 'a']
 ['S', 'b', 'S']
----expand---
+*---EXPAND---*
 q 1
 [('S', 0), 'a', ('S', 0)]
 ['a', 'S', 'b', 'S', 'b', 'S']
----momentary insuccess---
+*---MOMENTARY INSUCCESS---*
 b 1
 [('S', 0), 'a', ('S', 0)]
 ['a', 'S', 'b', 'S', 'b', 'S']
----another try---
+*---ANOTHER TRY---*
 q 1
 [('S', 0), 'a', ('S', 1)]
 ['a', 'S', 'b', 'S']
----momentary insuccess---
+*---MOMENTARY INSUCCESS---*
 b 1
 [('S', 0), 'a', ('S', 1)]
 ['a', 'S', 'b', 'S']
----another try---
+*---ANOTHER TRY---*
 q 1
 [('S', 0), 'a', ('S', 2)]
 ['c', 'b', 'S']
----advance---
+*---ADVANCE---*
 q 2
 [('S', 0), 'a', ('S', 2), 'c']
 ['b', 'S']
----advance---
+*---ADVANCE---*
 q 3
 [('S', 0), 'a', ('S', 2), 'c', 'b']
 ['S']
----expand---
+*---EXPAND---*
 q 3
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 0)]
 ['a', 'S', 'b', 'S']
----momentary insuccess---
+*---MOMENTARY INSUCCESS---*
 b 3
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 0)]
 ['a', 'S', 'b', 'S']
----another try---
+*---ANOTHER TRY---*
 q 3
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 1)]
 ['a', 'S']
----momentary insuccess---
+*---MOMENTARY INSUCCESS---*
 b 3
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 1)]
 ['a', 'S']
----another try---
+*---ANOTHER TRY---*
 q 3
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 2)]
 ['c']
----advance---
+*---ADVANCE---*
 q 4
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 2), 'c']
 []
----success---
+*---SUCCESS---*
 [('S', 0), 'a', ('S', 2), 'c', 'b', ('S', 2), 'c']
 -------RESULT:-------
 Sequence is accepted!
